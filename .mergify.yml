@@ -279,19 +279,20 @@ pull_request_rules:
   - name: Automatic merge on approval
     conditions:
       - and:
-        # Check for draft PR and WIP in title
-        - -draft
-        - -title~=(?i)wip
-        # ~needs-review && ~needs-acks && ~needs-bz && ~dont-merge && ( ~needs-ci || ( needs-ci && ci-waived ))
-        - label!=needs-review
-        - label!=needs-acks
-        - label!=needs-bz
-        - label!=dont-merge
-      - or:
-        - label!=needs-ci
         - and:
-          - label=needs-ci
-          - label=ci-waived
+          # Check for draft PR and WIP in title
+          - -draft
+          - -title~=(?i)wip
+          # ( ~needs-review && ~needs-acks && ~needs-bz && ~dont-merge ) && ( ~needs-ci || ( needs-ci && ci-waived ))
+          - label!=needs-review
+          - label!=needs-acks
+          - label!=needs-bz
+          - label!=dont-merge
+        - or:
+          - label!=needs-ci
+          - and:
+            - label=needs-ci
+            - label=ci-waived
     actions:
       merge:
         method: merge
