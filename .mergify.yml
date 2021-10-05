@@ -67,7 +67,7 @@ pull_request_rules:
     actions:
       label:
         add:
-          - needs-ci
+          - needs-review
           
   - name: Remove needs-review label
     conditions:
@@ -77,7 +77,7 @@ pull_request_rules:
     actions:
       label:
         remove:
-          - needs-ci
+          - needs-review
 
   
   # --- Plumber labels --- #
@@ -287,11 +287,11 @@ pull_request_rules:
         - label!=needs-acks
         - label!=needs-bz
         - label!=dont-merge
-        - or:
-          - label!=needs-ci
-          - and:
-            - label=needs-ci
-            - label=ci-waived
+      - or:
+        - label!=needs-ci
+        - and:
+          - label=needs-ci
+          - label=ci-waived
     actions:
       merge:
         method: merge
