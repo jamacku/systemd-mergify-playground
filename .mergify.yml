@@ -278,6 +278,10 @@ pull_request_rules:
   # --- Merge rules --- #
   - name: Automatic merge on approval
     conditions:
+      # Check for reviews, just to be sure!
+      - "#approved-reviews-by>=1"
+      - "#review-requested=0"
+      - "#changes-requested-reviews-by=0"
       # Check for draft PR and WIP in title
       - -draft
       - -title~=(?i)wip
