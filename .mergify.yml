@@ -1,6 +1,8 @@
 pull_request_rules:
 
+  #####################
   # --- CI labels --- #
+  #####################
   - name: Set needs-ci label
     conditions:
       - or:
@@ -56,8 +58,9 @@ pull_request_rules:
         remove:
           - needs-ci
 
-
+  #########################
   # --- Review labels --- #
+  #########################
   - name: Set needs-review label
     conditions:
       - or:
@@ -80,12 +83,11 @@ pull_request_rules:
           - needs-review
 
   
-  # --- Plumber labels --- #
-  # TODO: somehow sync with Plumber
-  
-  
+  #########################
   # --- Branch labels --- #
-  # - RHEL 9.0.0-beta - #
+  #########################
+  
+  # - RHEL 9.0.0-beta - label - #
   - name: Set rhel-9.0.0-beta label
     conditions:
       - base=rhel-9.0.0-beta
@@ -102,7 +104,7 @@ pull_request_rules:
         remove:
           - rhel-9.0.0-beta
         
-  # - RHEL 9.0.0 - #
+  # - RHEL 9.0.0 - label - #
   - name: Set rhel-9.0.0 label
     conditions:
       - base=rhel-9.0.0
@@ -119,7 +121,7 @@ pull_request_rules:
         remove:
           - rhel-9.0.0 
     
-  # - RHEL 9.1.0 - #
+  # - RHEL 9.1.0 - label - #
   - name: Set rhel-9.1.0 label
     conditions:
       - base=rhel-9.1.0
@@ -136,7 +138,7 @@ pull_request_rules:
         remove:
           - rhel-9.1.0
     
-  # - RHEL 9.2.0 - #
+  # - RHEL 9.2.0 - label - #
   - name: Set rhel-9.2.0 label
     conditions:
       - base=rhel-9.2.0
@@ -153,7 +155,7 @@ pull_request_rules:
         remove:
           - rhel-9.2.0
     
-  # - RHEL 9.3.0 - #
+  # - RHEL 9.3.0 - label - #
   - name: Set rhel-9.3.0 label
     conditions:
       - base=rhel-9.3.0
@@ -170,7 +172,7 @@ pull_request_rules:
         remove:
           - rhel-9.3.0
     
-  # - RHEL 9.4.0 - #
+  # - RHEL 9.4.0 - label - #
   - name: Set rhel-9.4.0 label
     conditions:
       - base=rhel-9.4.0
@@ -187,7 +189,7 @@ pull_request_rules:
         remove:
           - rhel-9.4.0
     
-  # - RHEL 9.5.0 - #
+  # - RHEL 9.5.0 - label - #
   - name: Set rhel-9.5.0 label
     conditions:
       - base=rhel-9.5.0
@@ -204,7 +206,7 @@ pull_request_rules:
         remove:
           - rhel-9.5.0
     
-  # - RHEL 9.6.0 - #
+  # - RHEL 9.6.0 - label - #
   - name: Set rhel-9.6.0 label
     conditions:
       - base=rhel-9.6.0
@@ -221,7 +223,7 @@ pull_request_rules:
         remove:
           - rhel-9.6.0
     
-  # - RHEL 9.7.0 - #
+  # - RHEL 9.7.0 - label - #
   - name: Set rhel-9.7.0 label
     conditions:
       - base=rhel-9.7.0
@@ -238,7 +240,7 @@ pull_request_rules:
         remove:
           - rhel-9.7.0
     
-  # - RHEL 9.8.0 - #
+  # - RHEL 9.8.0 - label - #
   - name: Set rhel-9.8.0 label
     conditions:
       - base=rhel-9.8.0
@@ -255,7 +257,7 @@ pull_request_rules:
         remove:
           - rhel-9.8.0
     
-  # - RHEL 9.9.0 - #
+  # - RHEL 9.9.0 - label - #
   - name: Set rhel-9.9.0 label
     conditions:
       - base=rhel-9.9.0
@@ -272,14 +274,120 @@ pull_request_rules:
         remove:
           - rhel-9.9.0
         
-  # TODO: labels and backports (rhel-9.0.0, rhel-9.1.0, ...)
+   
+  ##########################
+  # --- Backport rules --- #
+  ##########################
+   
+  # - RHEL 9.1.0 - backport - #
+  - name: Backport patches to rhel-9.1.0
+    conditions:
+      - base=main
+      - label=rhel-9.1.0_backport
+    actions:
+      backport:
+        title: "{{ title }}"
+        branches:
+          - rhel-9.1.0
+            
+  # - RHEL 9.2.0 - backport - #
+  - name: Backport patches to rhel-9.2.0
+    conditions:
+      - base=main
+      - label=rhel-9.2.0_backport
+    actions:
+      backport:
+        title: "{{ title }}"
+        branches:
+          - rhel-9.2.0
+          
+  # - RHEL 9.3.0 - backport - #
+  - name: Backport patches to rhel-9.3.0
+    conditions:
+      - base=main
+      - label=rhel-9.3.0_backport
+    actions:
+      backport:
+        title: "{{ title }}"
+        branches:
+          - rhel-9.3.0
   
+  # - RHEL 9.4.0 - backport - #
+  - name: Backport patches to rhel-9.4.0
+    conditions:
+      - base=main
+      - label=rhel-9.4.0_backport
+    actions:
+      backport:
+        title: "{{ title }}"
+        branches:
+          - rhel-9.4.0
+          
+  # - RHEL 9.5.0 - backport - #
+  - name: Backport patches to rhel-9.5.0
+    conditions:
+      - base=main
+      - label=rhel-9.5.0_backport
+    actions:
+      backport:
+        title: "{{ title }}"
+        branches:
+          - rhel-9.5.0
+          
+  # - RHEL 9.6.0 - backport - #
+  - name: Backport patches to rhel-9.6.0
+    conditions:
+      - base=main
+      - label=rhel-9.6.0_backport
+    actions:
+      backport:
+        title: "{{ title }}"
+        branches:
+          - rhel-9.6.0
+          
+  # - RHEL 9.7.0 - backport - #
+  - name: Backport patches to rhel-9.7.0
+    conditions:
+      - base=main
+      - label=rhel-9.7.0_backport
+    actions:
+      backport:
+        title: "{{ title }}"
+        branches:
+          - rhel-9.7.0
+          
+  # - RHEL 9.8.0 - backport - #
+  - name: Backport patches to rhel-9.8.0
+    conditions:
+      - base=main
+      - label=rhel-9.8.0_backport
+    actions:
+      backport:
+        title: "{{ title }}"
+        branches:
+          - rhel-9.8.0
+          
+  # - RHEL 9.9.0 - backport - #
+  - name: Backport patches to rhel-9.9.0
+    conditions:
+      - base=main
+      - label=rhel-9.9.0_backport
+    actions:
+      backport:
+        title: "{{ title }}"
+        branches:
+          - rhel-9.9.0
+          
   
+  #######################
   # --- Merge rules --- #
-  - name: Automatic merge on approval
+  #######################
+  
+  # - Pre-merge rules - #
+  - name: Let's sync with Plumber before merge
     conditions:
       # Check for reviews, just to be sure!
-      - "#approved-reviews-by>=1"
+      # - "#approved-reviews-by>=1"
       - "#review-requested=0"
       - "#changes-requested-reviews-by=0"
       # Check for draft PR and WIP in title
@@ -296,5 +404,34 @@ pull_request_rules:
           - label=needs-ci
           - label=ci-waived
     actions:
+      label:
+        add:
+          - waiting-for-plumber
+  
+  # - Let's merge it - #
+  - name: Automatic merge on approval
+    conditions:
+      # Check for reviews, just to be sure!
+      # - "#approved-reviews-by>=1"
+      - "#review-requested=0"
+      - "#changes-requested-reviews-by=0"
+      # Check for draft PR and WIP in title
+      - -draft
+      - -title~=(?i)wip
+      # ( ~needs-review && ~needs-acks && ~needs-bz && ~dont-merge ) && ( ~needs-ci || ( needs-ci && ci-waived ))
+      - label!=needs-review
+      - label!=needs-acks
+      - label!=needs-bz
+      - label!=dont-merge
+      - label=reviewed-by-plumber
+      - or:
+        - label!=needs-ci
+        - and:
+          - label=needs-ci
+          - label=ci-waived
+    actions:
       merge:
-        method: merge
+        actions:
+      merge:
+        method: rebase
+        rebase_fallback: merge
